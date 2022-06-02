@@ -2,6 +2,7 @@ let scroll = 0;
 let oldscroll = 0;
 let iteration = 1;
 let hearts = 3;
+let playgame = false;
 
 window.addEventListener('scroll', function (e) {
     // Get the new Value
@@ -22,49 +23,66 @@ window.addEventListener('scroll', function (e) {
 
 
 })
+function play() {
+    hearts = 3
+    document.getElementById("heartstatus").innerHTML = `${hearts} ❤️`
+    console.log("Game started")
+    document.querySelectorAll(".tree").forEach(tree => {
+        tree.remove()
+    })
+    document.getElementById("menu").remove()
 
-let gameloop = window.setInterval(function () {
-    var rect = document.getElementById("player").getBoundingClientRect();
-    if(document.getElementById("gamefield").classList.contains("animation")){
-        document.getElementById("gamefield").classList.remove("animation")
-    }
-/* */
-    var topoffset = Math.floor(Math.random() * 27)
+
+    let gameloop = window.setInterval(function () {
+        document.getElementById("meters").innerHTML = `Score: ${iteration} m`
+        var rect = document.getElementById("player").getBoundingClientRect();
+        if (document.getElementById("gamefield").classList.contains("animation")) {
+            document.getElementById("gamefield").classList.remove("animation")
+        }
+        /* */
+        var topoffset = Math.floor(Math.random() * 27)
    /*  if (iteration % 2 === 0) */{ document.getElementById("gamefield").innerHTML += `<div class="tree hiton" style="top:${topoffset * 33}px"> ` }
 
-    document.querySelectorAll(".tree").forEach(tree => {
+        document.querySelectorAll(".tree").forEach(tree => {
 
-        var top = tree.computedStyleMap().get('left').value;
-        tree.style.left = `${top - 33}px`
+            var top = tree.computedStyleMap().get('left').value;
+            tree.style.left = `${top - 33}px`
 
-        treecoords = tree.getBoundingClientRect()
+            treecoords = tree.getBoundingClientRect()
 
-        if (treecoords.left < 160 &&
-            treecoords.left + 33 > 60 &&
-            treecoords.top < rect.top + 100 &&
-            33 + treecoords.top > rect.top && tree.classList.contains("hiton")) {
+            if (treecoords.left < 160 &&
+                treecoords.left + 33 > 60 &&
+                treecoords.top < rect.top + 100 &&
+                33 + treecoords.top > rect.top && tree.classList.contains("hiton")) {
 
-            document.getElementById("gamefield").classList.add("animation")
-            tree.classList.remove("hiton")
-            hearts--
-            document.getElementById("heartstatus").innerHTML = `${hearts} ❤️`
+                document.getElementById("gamefield").classList.add("animation")
+                tree.classList.remove("hiton")
+                hearts--
+                document.getElementById("heartstatus").innerHTML = `${hearts} ❤️`
 
-            if(hearts === 0){   
-                clearInterval(gameloop)
+                if (hearts === 0) {
+                    clearInterval(gameloop)
+                    const node = document.createElement("div")
+                    node.innerHTML = `<div class="h1div">
+                <h1>Dodge the trees!</h1>
+            </div>
+            <div><button class="playbutton" onclick="javascript:play()">Try again!</button></div>`
+                    node.classList.add("menu")
+                    node.id = "menu"
+                    document.getElementById("gamefield").appendChild(node)
+                    iteration = 0
+                    
+                }
+            }
+            if (top < 0) {
+                tree.remove()
             }
         }
+        )
+        iteration++
 
-        if (top < 0) {
-            tree.remove()
-
-        }
-    }
-
-    )
-    iteration++
-
-}, 300);
+    }, 300);
 
 
 
-
+}
