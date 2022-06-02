@@ -21,13 +21,17 @@
                 <div class="h1div">
                     <h1>Dodge the trees!</h1>
                 </div>
-                <div><button class="playbutton" onclick="javascript:play()">Play</button></div>
+                <div><button class="playbutton1" onclick="javascript:play('normal')">Play</button>
+                    <button class="playbutton2"
+                        onclick="javascript:play('expert')">Expert mode</button></div>
             </div>
             <div class="player" id="player"></div>
             <div class="hearts">
                 <p id="heartstatus">3 ❤️</p>
             </div>
-            <div class="score"><p id="meters">Score: 0 m</p></div>
+            <div class="score">
+                <p id="meters">Score: 0 m</p>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

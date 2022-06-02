@@ -86,16 +86,27 @@ h1{
     left: 50%;
     transform: translate(-50%, 0);
 }
-.playbutton{
+.playbutton1{
     position: absolute;
     background-color: orangered;
     font-family: 'Roboto', sans-serif;
     font-size: 35px;
     
     top: 250px;
-    left: 0; 
-    right: 0; 
-    margin: auto;
+    left: 20px; 
+    
+    width: 200px;
+    height: 100px;
+}
+.playbutton2{
+    position: absolute;
+    background-color: orangered;
+    font-family: 'Roboto', sans-serif;
+    font-size: 35px;
+    
+    top: 250px;
+    right: 20px; 
+    
     width: 200px;
     height: 100px;
 }

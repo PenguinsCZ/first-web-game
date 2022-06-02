@@ -23,7 +23,7 @@ window.addEventListener('scroll', function (e) {
 
 
 })
-function play() {
+function play(gamemode) {
     hearts = 3
     document.getElementById("heartstatus").innerHTML = `${hearts} ❤️`
     console.log("Game started")
@@ -41,7 +41,7 @@ function play() {
         }
         /* */
         var topoffset = Math.floor(Math.random() * 27)
-   /*  if (iteration % 2 === 0) */{ document.getElementById("gamefield").innerHTML += `<div class="tree hiton" style="top:${topoffset * 33}px"> ` }
+     if ((gamemode == 'normal' && iteration % 2 === 0) || gamemode == "expert") { document.getElementById("gamefield").innerHTML += `<div class="tree hiton" style="top:${topoffset * 33}px"> ` }
 
         document.querySelectorAll(".tree").forEach(tree => {
 
@@ -66,7 +66,8 @@ function play() {
                     node.innerHTML = `<div class="h1div">
                 <h1>Dodge the trees!</h1>
             </div>
-            <div><button class="playbutton" onclick="javascript:play()">Try again!</button></div>`
+            <div><button class="playbutton1" onclick="javascript:play('normal')">Try again! (Normal)</button>
+            <button class="playbutton2" onclick="javascript:play('expert')">Try again! (Expert)</button></div>`
                     node.classList.add("menu")
                     node.id = "menu"
                     document.getElementById("gamefield").appendChild(node)
